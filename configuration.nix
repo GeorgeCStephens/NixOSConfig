@@ -10,6 +10,8 @@
       ./hardware-configuration.nix
     ];
 
+  nixpkgs.config.allowBroken = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,6 +50,9 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  # Disable wayland and force X11
+  services.xserver.displayManager.gdm.wayland = false;
 
   # Configure keymap in X11
   services.xserver = {
@@ -117,10 +122,13 @@
   	neofetch
 	git-credential-manager
 	docker
-  ];
+	minecraft
+	jdk
+	prismlauncher
+];
 
   virtualisation.docker.enable = true;
-
+ 
  # Steam config
   programs.steam = {
     enable = true;
