@@ -49,6 +49,9 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # Disable wayland and force X11
+  services.xserver.displayManager.gdm.wayland = false;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "gb";
@@ -117,6 +120,7 @@
   	neofetch
 	git-credential-manager
 	docker
+	prismlauncher
   ];
 
   virtualisation.docker.enable = true;
@@ -153,7 +157,7 @@
   # this value at the release version of the first install of this system.
   # Before changing thiis value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "unstable"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -194,7 +198,8 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+
   };
 
 }
